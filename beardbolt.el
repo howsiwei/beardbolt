@@ -772,6 +772,7 @@ With prefix argument, choose from starter files in `bb-starter-files'."
                           return (plist-get e :command)))
             (cmd (bb--split-rm-double cmd "-o"))
             (cmd (bb--split-rm-double cmd "-c"))
+            (cmd (mapconcat #'identity (cl-remove-if (apply-partially #'string-match-p "sanitize") (split-string cmd)) " "))
             (cmd (bb--split-rm-single cmd "-flto" #'string-prefix-p)))
       (list cmd bb-ccj-extra-flags)))
 
