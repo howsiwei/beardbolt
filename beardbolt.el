@@ -768,7 +768,7 @@ With prefix argument, choose from starter files in `bb-starter-files'."
                    (json-parse-buffer :object-type 'plist)))
             (cmd (cl-loop for e across ccj
                           for file = (plist-get e :file)
-                          when (equal file buffer-file-name)
+                          when (equal (file-truename file) buffer-file-name)
                           return (plist-get e :command)))
             (cmd (bb--split-rm-double cmd "-o"))
             (cmd (bb--split-rm-double cmd "-c"))
